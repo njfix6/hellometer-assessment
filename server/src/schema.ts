@@ -4,6 +4,7 @@ const schema = buildSchema(`
 
   type Store {
     orders: [Order]
+    name: String!
   }
 
   type Order {

@@ -1,6 +1,19 @@
 import { gql, useQuery } from "@apollo/client";
 import "./App.css";
-import logo from "./logo.svg";
+import Chart from "./Chart";
+
+export type Store = {
+  orders: Order[];
+  name: string;
+};
+
+export type Order = {
+  arrivalTime: string;
+  order: number;
+  wait: number;
+  payment: number;
+  total: number;
+};
 
 function App() {
   const GET_STORES = gql`
@@ -24,22 +37,31 @@ function App() {
   if (error) return <p>Error : {error.message}</p>;
   console.log("data", data);
 
+  const stores: Store[] = data.getStores?.map((s: any) => {
+    const store: Store = {
+      name: s.name ?? "",
+      orders: s.orders.map((o: any) => {
+        const order: Order = {
+          arrivalTime: o.arrivalTime ?? "",
+          order: o.order ?? 0,
+          wait: o.wait ?? 0,
+          payment: o.payment ?? 0,
+          total: o.total ?? 0,
+        };
+
+        return order;
+      }),
+    };
+
+    return store;
+  });
+
+  // TODO: fill this in
+  const store = stores.find((s) => s.name === "98");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Chart store={store} />
     </div>
   );
 }

@@ -14,8 +14,6 @@ export type Order = {
 };
 
 export const stores = (): Store[] => {
-  // TODO: fill in with file
-
   const directory = "./src/stores/";
 
   var files = fs.readdirSync("./src/stores/");

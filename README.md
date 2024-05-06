@@ -2,19 +2,19 @@
 
 ## Application Insights
 
-Shows the slowest wait time and when they occurred. Lists the wait times and applies `Alert` and `Warning` tags to the slowest times. The user should dig into these times to see why the customer had to wait so long for their order.
+Shows the slowest wait time and when they occurred. Lists the wait times and applies `Alert` and `Warning` tags to the slowest wait times. The user (store owner) should dig into these times to see why the customer had to wait so long for their order.
 
 ## Other Features
 
-- Be able to select multiple stores
-- See graph of all `Wait times`
-- See graph of total order time broken down into `Order Time`, `Wait Time`, and `Payment Time`.
+- Be able to select multiple stores.
+- See the graph of all `Wait times`.
+- See the graph of total order time broken down into `Order Time`, `Wait Time`, and `Payment Time`.
 
 ## Running the Application
 
 ### Prerequisites
 
-These are the versions I'm running but would most likely work with other versions as well.
+These are the versions I'm running but would most likely work with other versions.
 
 ```
 Node.js - 16.16.0

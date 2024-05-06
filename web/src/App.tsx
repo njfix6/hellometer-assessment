@@ -17,15 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar } from "recharts";
 import { quantile } from "./Util";
 import Warning, { Level } from "./Warning";
 
@@ -165,34 +157,31 @@ function App() {
               </Card>
 
               <Card>
-                <CardHeader title={"Wait time data"} />
+                <CardHeader title={"Wait Time Data"} />
 
                 <CardContent>
-                  <BarChart
-                    width={800}
-                    height={500}
-                    data={store?.orders ?? []}
-                    margin={{
-                      top: 20,
-                      right: 30,
-                      left: 20,
-                      bottom: 5,
-                    }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="arrivalTime" fontSize={10} />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="wait" stackId="a" fill="#82ca9d" />
-                  </BarChart>
+                  <Chart
+                    store={store}
+                    barLabels={
+                      <Bar dataKey="wait" stackId="a" fill="#82ca9d" />
+                    }
+                  />
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader title={"Order Data"} />
                 <CardContent>
-                  <Chart store={store} />
+                  <Chart
+                    store={store}
+                    barLabels={
+                      <>
+                        <Bar dataKey="order" stackId="a" fill="#8884d8" />
+                        <Bar dataKey="wait" stackId="a" fill="#82ca9d" />
+                        <Bar dataKey="payment" stackId="a" fill="#ffc658" />
+                      </>
+                    }
+                  />
                 </CardContent>
               </Card>
             </Stack>

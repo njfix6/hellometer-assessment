@@ -7,7 +7,7 @@ Shows the slowest wait time and when they occurred. Lists the wait times and app
 ## Other Features
 
 - Be able to select multiple stores.
-- See the graph of all `Wait times`.
+- See the graph of all `Wait Times`.
 - See the graph of total order time broken down into `Order Time`, `Wait Time`, and `Payment Time`.
 
 ## Running the Application

@@ -6,7 +6,9 @@ import Chart from "./Chart";
 import {
   Box,
   Card,
+  CardContent,
   CardHeader,
+  Chip,
   FormControl,
   Grid,
   InputLabel,
@@ -16,6 +18,7 @@ import {
   Typography,
 } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { quantile } from "./Util";
 
 export type Store = {
   orders: Order[];
@@ -60,7 +63,6 @@ function App() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
-  console.log("data", data);
 
   const stores: Store[] = data.getStores?.map((s: any) => {
     const store: Store = {
@@ -81,8 +83,28 @@ function App() {
     return store;
   });
 
-  // TODO: fill this in
   const store = stores.find((s) => s.name === name);
+
+  const q75 = quantile(store?.orders?.map((order) => order.wait) ?? [], 0.75);
+  const q90 = quantile(store?.orders?.map((order) => order.wait) ?? [], 0.9);
+
+  const q75FilteredStores: Store = {
+    name: store?.name ?? "",
+    orders:
+      store?.orders?.filter((o) => {
+        return o.wait < q90 && o.wait > q75;
+      }) ?? [],
+  };
+
+  const q90FilteredStores: Store = {
+    name: store?.name ?? "",
+    orders:
+      store?.orders?.filter((o) => {
+        return o.wait >= q90;
+      }) ?? [],
+  };
+
+  console.log("debug: q90", q75);
 
   return (
     <div className="App">
@@ -109,11 +131,46 @@ function App() {
             </Stack>
             <Stack spacing={4}>
               <Card>
-                <CardHeader title={"Slow Wait times"} />
+                <CardHeader title="Slow Wait Times" />
+                <CardContent>
+                  <Stack spacing={2}>
+                    {q90FilteredStores.orders.map((order) => (
+                      <Stack
+                        direction={"row"}
+                        spacing={2}
+                        alignItems={"center"}
+                      >
+                        <Chip
+                          label="Alert"
+                          style={{ background: "red", color: "white" }}
+                        />
+
+                        <Typography>{`${order.arrivalTime} - customer waited ${order.wait}`}</Typography>
+                      </Stack>
+                    ))}
+                    {q75FilteredStores.orders.map((order) => (
+                      <Stack
+                        direction={"row"}
+                        spacing={2}
+                        alignItems={"center"}
+                      >
+                        <Chip
+                          label="Warning"
+                          style={{ background: "orange", color: "white" }}
+                        />
+
+                        <Typography>{`${order.arrivalTime} - customer waited ${order.wait}`}</Typography>
+                      </Stack>
+                    ))}
+                  </Stack>
+                </CardContent>
               </Card>
+
               <Card>
                 <CardHeader title={"Order Data"} />
-                <Chart store={store} />
+                <CardContent>
+                  <Chart store={store} />
+                </CardContent>
               </Card>
             </Stack>
           </Grid>

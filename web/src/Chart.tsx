@@ -7,6 +7,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+
 import { Store } from "./App";
 
 // const data = [
@@ -68,9 +69,9 @@ type ChartProps = {
 
 function Chart({ store }: ChartProps) {
   return (
-    // <ResponsiveContainer width="100%" height="100%">
+    // <ResponsiveContainer width="100%" height={"100%"}>
     <BarChart
-      width={1500}
+      width={800}
       height={500}
       data={store?.orders ?? []}
       margin={{

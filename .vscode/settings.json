@@ -1,0 +1,28 @@
+{
+  "workbench.startupEditor": "newUntitledFile",
+  "window.zoomLevel": 1,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true
+  },
+
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  },
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "node_modules": true
+  }
+}

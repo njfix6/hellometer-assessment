@@ -2,7 +2,12 @@
 
 ## Application Insights
 
-This applications helps a user look at its different stores and determins when slow times have occured. This should help them pinpoint when the slow period occured and when to fix it. The application shows the periods that were 90% and above. It also shows a stacked bar chart of each time period.
+Shows the slowest wait time and when they occured. Lists the wait times and applies "Alert" and "Warning" tags to the slowest times. The user should dig into these times to see why the order took so long to make.
+
+## Other Features
+
+- Be able to select multiple stores
+- See breakdown of each order data brokend down from `Order Time`, `Wait Time`, and `Payment Time`.
 
 ## Running the Application
 
@@ -21,3 +26,5 @@ cd web
 yarn
 yarn start
 ```
+
+Visit `http://localhost:3000/` to see the application.
